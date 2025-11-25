@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         title: {
             type: DataTypes.STRING,
         },
-        describtion: {
+        description: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        ImageType: DataTypes.STRING,
-        ImageName: DataTypes.STRING,
-        ImageData: DataTypes.BLOB('long'),
+        imageType: DataTypes.STRING,
+        imageName: DataTypes.STRING,
+        imageData: DataTypes.BLOB('long'),
     }
     , {
         tableName: "komiks",

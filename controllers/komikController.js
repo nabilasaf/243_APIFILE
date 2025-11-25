@@ -1,6 +1,5 @@
-
-const db = require('../../models');
-const komikService = require('../../services/KomikService');
+const db = require('../models');
+const komikService = require('../services/komikService');
 
 async function createKomik(req, res) {
     try {
@@ -43,6 +42,7 @@ async function getKomikById(req, res) {
         res.status(404).json({ success: false, error: error.message });
     }
 }
+
 async function updateKomik(req, res) {
     try {
         const komikData = req.body;
@@ -52,20 +52,20 @@ async function updateKomik(req, res) {
             komikData.imageName = req.file.originalname;
             komikData.imageData = req.file.buffer;
         }
+
         const result = await komikService.updateKomik(db, req.params.id, komikData);
-        res.status(200).json({ success: true, data: result });
-    }catch (error) {
+        res.json({ success: true, data: result });
+    } catch (error) {
         res.status(400).json({ success: false, error: error.message });
     }
 }
 
 async function deleteKomik(req, res) {
     try {
-        const { id } = req.params;
-        const result = await komikService.deleteKomik(db, id);
-        res.status(200).json({ success: true, data: result });
+        const result = await komikService.deleteKomik(db, req.params.id);
+        res.json({ success: true, message: result.message });
     } catch (error) {
-        res.status(404).json({ success: false, error: error.message });
+        res.status(400).json({ success: false, error: error.message });
     }
 }
 
